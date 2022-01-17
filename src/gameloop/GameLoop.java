@@ -13,44 +13,43 @@ public class GameLoop extends JFrame implements ActionListener {
 
     // addition
     private TileMap tilemap = new TileMap();    // TileMap extends JPanel
-    
-    private GamePanel gamePanel = new GamePanel();
-    private JPanel buttonPanel = new JPanel();
-    
+
+    final JPanel mainPanel = new JPanel();
+    private final GamePanel gamePanel = new GamePanel();
+    private final JPanel buttonPanel = new JPanel();
+
     private JButton startButton = new JButton("Start");
     private JButton quitButton = new JButton("Quit");
     private JButton pauseButton = new JButton("Pause");
-    
+
     private GridLayout mainLayout = new GridLayout(0, 2);
-    
+//    private GridBagLayout mainLayout = new GridBagLayout();
+
     private boolean running = false;
     private boolean paused = false;
 //   private int fps = 60;
     private int frameCount = 0;
-    
-    private Ball ball = new Ball(gamePanel);
+
+ //   private Ball ball = new Ball(gamePanel);
 
     public GameLoop() {
         super("Fixed Timestep Game Loop Test");
-    
-        
+
         Container cp = getContentPane();
+        //    cp.setLayout(mainLayout);
 //        cp.setLayout(new BorderLayout());
- //       cp.setLayout(new GridLayout(1,2));
+        //       cp.setLayout(new GridLayout(1,2));
         // added
 //        cp.add(gamePanel);
 //        cp.add(tilemap);
-        
+
         //JPanel p = new JPanel();
 //        p.setLayout(new GridLayout(1, 2));
-
-        final JPanel mainPanel = new JPanel();
         mainPanel.setLayout(mainLayout);
         mainPanel.add(gamePanel);
         mainPanel.add(tilemap);
 
-        buttonPanel.setLayout(new GridLayout(1, 3));
-        
+        //    buttonPanel.setLayout(new GridLayout(1, 3));
         buttonPanel.add(startButton);
         buttonPanel.add(pauseButton);
         buttonPanel.add(quitButton);
@@ -58,15 +57,12 @@ public class GameLoop extends JFrame implements ActionListener {
 //        p.add(startButton);
 //        p.add(pauseButton);
 //        p.add(quitButton);
-    
-        
+
 //        cp.add(gamePanel, BorderLayout.NORTH);
 //        cp.add(tilemap, BorderLayout.CENTER);
 //        cp.add(p, BorderLayout.SOUTH);
-
-        cp.add(mainPanel, BorderLayout.CENTER);
+        cp.add(mainPanel);//, BorderLayout.CENTER);
         cp.add(buttonPanel, BorderLayout.SOUTH);
-        
 
         setSize(500, 500);
 
@@ -184,7 +180,7 @@ public class GameLoop extends JFrame implements ActionListener {
 
     private void drawGame(float interpolation) {
         gamePanel.setInterpolation(interpolation);
-        gamePanel.repaint();
+        mainPanel.repaint();
     }
 
     public void draw(Graphics g) {
